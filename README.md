@@ -55,6 +55,12 @@ If you fail to map the container's `/signal` directory to a persistent volume yo
 
 This is the name of [this image on DockerHub].
 
+## Updating the image
+
+From time to time [Signal] may experience security updates. To ensure you have the latest build of this image you can run the following:
+
+`docker pull rexypoo/signal-desktop`
+
 ## [Entrypoint Helper]
 
 This image uses an [entrypoint helper] script to manage permissions within the docker container.
