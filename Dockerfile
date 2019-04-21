@@ -1,5 +1,5 @@
 # docker run -it --rm --net=host -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v ~/virt/docker/volumes/signal-desktop:/signal rexypoo/signal-desktop
-FROM ubuntu AS build
+FROM debian:stretch AS build
 ADD https://updates.signal.org/desktop/apt/keys.asc /signal/keys.asc
 RUN apt update && apt install -y \
     apt-transport-https \
@@ -33,9 +33,7 @@ RUN adduser \
     --no-create-home \
     --uid "$UID" \
     "$USER" \
-    && chown $USER:$USER .
-
-VOLUME "/$USER"
+    && chown "$USER":"$USER" .
 
 ADD https://raw.githubusercontent.com/Rexypoo/docker-entrypoint-helper/master/entrypoint-helper.sh /usr/local/bin/entrypoint-helper.sh
 RUN chmod u+x /usr/local/bin/entrypoint-helper.sh
