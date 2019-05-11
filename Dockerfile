@@ -6,19 +6,19 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     gnupg \
     libx11-xcb1 \
-    && apt-key add /signal/keys.asc \
-    && echo \
+ && apt-key add /signal/keys.asc \
+ && echo \
     "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" \
-    > /etc/apt/sources.list.d/signal-xenial.list \
-    && apt-get update && apt-get install -y \
+  > /etc/apt/sources.list.d/signal-xenial.list \
+ && apt-get update && apt-get install -y \
     signal-desktop \
-    && apt-get purge -y \
+ && apt-get purge -y \
     apt-transport-https \
     ca-certificates \
     gnupg \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+ && apt-get autoremove -y \
+ && apt-get clean -y \
+ && rm -rf /var/lib/apt/lists/*
 
 FROM build AS drop-privileges
 ENV USER=signal
@@ -33,7 +33,7 @@ RUN adduser \
     --no-create-home \
     --uid "$UID" \
     "$USER" \
-    && chown $USER:$USER .
+ && chown $USER:$USER .
 
 VOLUME "/$USER"
 
