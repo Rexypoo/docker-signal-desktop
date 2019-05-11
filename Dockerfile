@@ -1,7 +1,7 @@
 # docker run -it --rm --net=host -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v ~/virt/docker/volumes/signal-desktop:/signal rexypoo/signal-desktop
 FROM ubuntu AS build
 ADD https://updates.signal.org/desktop/apt/keys.asc /signal/keys.asc
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
     gnupg \
@@ -10,14 +10,14 @@ RUN apt update && apt install -y \
     && echo \
     "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" \
     > /etc/apt/sources.list.d/signal-xenial.list \
-    && apt update && apt install -y \
+    && apt-get update && apt-get install -y \
     signal-desktop \
-    && apt purge -y \
+    && apt-get purge -y \
     apt-transport-https \
     ca-certificates \
     gnupg \
-    && apt autoremove -y \
-    && apt clean -y \
+    && apt-get autoremove -y \
+    && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
 FROM build AS drop-privileges
