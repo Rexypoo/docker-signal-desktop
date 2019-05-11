@@ -25,8 +25,10 @@ ENV USER=signal
 ENV UID=58658
 ENV GID=$UID
 WORKDIR "/$USER"
+ENV TEMPLATE="$(pwd)"/.config/Signal
 
-RUN adduser \
+RUN mkdir -p "$TEMPLATE" \
+ && adduser \
     --disabled-password \
     --gecos "" \
     --home "$(pwd)" \
